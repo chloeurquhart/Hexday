@@ -1,0 +1,17 @@
+{
+  "name": "@hexday/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "typecheck": "tsc --project tsconfig.json"
+  },
+  "dependencies": {
+    "@hexday/shared": "workspace:*",
+    "fastify": "^5.12.8"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.15"
+  }
+}
