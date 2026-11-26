@@ -9,3 +9,14 @@ if (!connectionString) {
 const adapter = new PrismaPg({ connectionString });
 
 export const prisma = new PrismaClient({ adapter });
+
+
+/** Runs the simplest possible query. Returns false instead of throwing if the database is unreachable. */
+export async function checkDatabase(): Promise<boolean> {
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    return true;
+  } catch {
+    return false;
+  }
+}

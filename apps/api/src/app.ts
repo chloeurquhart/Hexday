@@ -1,15 +1,25 @@
 import Fastify, { type FastifyInstance } from "fastify";
 import type { HealthResponse } from "@hexday/shared";
 
-/**
- * Builds the Fastify app without starting a server, so tests can exercise
- * routes in-process with `app.inject()`.
- */
-export function buildApp(): FastifyInstance {
+
+export interface AppDependencies {
+  /** Resolves true if the database answers, false if it doesn't. */
+  checkDatabase: () => Promise<boolean>;
+}
+
+
+export function buildApp(deps: AppDependencies): FastifyInstance {
   const app = Fastify({ logger: true });
 
-  app.get("/health", async (): Promise<HealthResponse> => {
-    return { status: "ok" };
+  app.get("/health", async (_request, reply): Promise<HealthResponse> => {
+    const databaseIsUp = await deps.checkDatabase();
+
+    if (!databaseIsUp) {
+      reply.code(503);
+      return { status: "degraded", database: "disconnected" };
+    }
+
+    return { status: "ok", database: "connected" };
   });
 
   return app;

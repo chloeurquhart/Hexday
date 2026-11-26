@@ -7,6 +7,8 @@ An app for busy bees.
 
 ```bash
 pnpm install
+Copy-Item .env.example .env   # macOS/Linux: cp .env.example .env
+docker compose up -d
 pnpm dev
 ```
 

@@ -48,3 +48,14 @@ body {
 .status[data-state="connected"] {
   background: color-mix(in srgb, var(--honey) 25%, white);
 }
+
+.statuses {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.statuses .status {
+  margin: 0;
+}
