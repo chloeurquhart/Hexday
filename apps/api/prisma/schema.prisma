@@ -1,0 +1,11 @@
+// Hexday database schema.
+// Models (tables) will be added here as features need them, starting with tasks in Sprint 1.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
